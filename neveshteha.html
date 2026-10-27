@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>نوشته‌ها | مهردار</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #0f0f0f;
+      color: #f5e6a8;
+      font-family: Tahoma, sans-serif;
+      direction: rtl;
+      line-height: 2;
+    }
+
+    header {
+      padding: 24px 40px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    header a {
+      color: #d4af37;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    main {
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 55px 0 80px;
+    }
+
+    h1 {
+      margin: 0 0 30px;
+      text-align: center;
+      color: #d4af37;
+      font-size: 38px;
+      font-weight: normal;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 0 auto 55px;
+      text-align: center;
+      font-size: 19px;
+      line-height: 2.2;
+    }
+
+    .article-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .article-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 45px;
+      padding: 14px 18px;    
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 8px;
+      color: #f5e6a8;
+      text-decoration: none;
+      text-align: center;
+      font-size: 20px;
+      line-height: 1.8;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .article-item:hover {
+      background: rgba(212, 175, 55, 0.08);
+      border-color: #d4af37;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding-top: 40px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .article-list {
+        grid-template-columns: 1fr;
+      }
+
+      .article-item {
+        min-height: 40px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html">بازگشت به مهردار</a>
+  </header>
+
+  <main>
+
+    <h1>نوشته‌ها</h1>
+
+    <p class="intro">
+      جستارهایی دربارهٔ انسان، فرهنگ، خرد، راستی و زندگی امروز؛
+      با نگاهی به جهان‌بینی ایرانی و کارآمدی آن در روزگار ما.
+    </p>
+
+    <div class="article-list">
+
+      <a class="article-item" href="yad-ensan.html">
+        درباره یاد، انسان و سرنوشت جمعی
+      </a>
+<a class="article-item" href="farhang.html">
+  فرهنگ
+</a>
+    </div>
+
+  </main>
+
+</body>
+</html>
+
