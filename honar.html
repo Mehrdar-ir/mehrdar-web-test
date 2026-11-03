@@ -84,6 +84,53 @@
         font-size: 24px;
       }
     }
+
+    .art-sections {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin: 65px auto 0;
+    }
+
+    .art-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 170px;
+      padding: 22px;
+      box-sizing: border-box;
+      border: 1px solid rgba(212, 175, 55, 0.65);
+      border-radius: 10px;
+      background: #191714;
+      color: #d8c892;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .art-card:hover, .art-card:focus-visible {
+      background: #272117;
+      border-color: #d4af37;
+    }
+
+    .art-card h2 {
+      color: #d4af37;
+      font-size: 24px;
+      font-weight: normal;
+      margin: 0 0 12px;
+    }
+
+    .art-card p {
+      font-size: 15px;
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      .art-sections { grid-template-columns: 1fr; gap: 16px; }
+      .art-card { min-height: 140px; }
+      .art-card h2 { font-size: 22px; }
+    }
   </style>
 </head>
 
@@ -119,406 +166,16 @@
 
     
 
-<h2 class="gallery-title">نگارخانهٔ آثار چوبی</h2>
-
-<div id="wood-gallery"></div>
-
-<script>
-  // فهرست آثار چوبی
-  // برای تغییر جای هر اثر، تنها شماره order را تغییر بده.
-
-  const artworks = [
- {
-  order: 1,
-  title: "کوروش بزرگ",
-  method: "",
-  image: "art/کوروش.png",
-  ready: true
-},
-    {
-      order: 2,
-      title: "دبیرهٔ میخی",
-      method: "آزاد، برگرفته از ایران",
-      image: "art/خط میخی.png",
-      ready: true
-    },
-    {
-      order: 3,
-      title: "جمشید و پوزئیدون",
-      method: "نیمه‌آزاد، برگرفته از اساطیر یونان و ایران",
-      image: "art/Jamshid va Poseidon.png",
-      ready: true
-    },
-    {
-      order: 4,
-      title: "خیام",
-      method: "آزاد",
-      image: "art/napeyda.png",
-      ready: true
-    },
-    {
-      order: 5,
-      title: "خنیاگران",
-      method: "برگرفته از یونان باستان",
-      image: "art/Khonyagaran.png",
-      ready: true
-    },
-    {
-      order: 6,
-      title: "شک",
-      method: "آزاد، کنده‌کاری روی پوست یک گردو؛ نمایش از هفت زاویه",
-      image: "art/Shak.png",
-      ready: true
-    },
-    {
-      order: 7,
-      title: "فرَوَهر",
-      method: "آزاد؛ اندیشهٔ نیک . گفتار نیک . کردار نیک",
-      image: "art/Fravahar.png",
-      ready: true
-    },
-    {
-      order: 8,
-      title: "حافظ",
-      method: "آزاد — بیا ساقی! از کنج دیر مغان، مشو دور که آنجاست گنج روان",
-      image: "art/Hafez.png",
-      ready: true
-  },
-  {
-    order: 9,
-    title: "خفتگان",
-    method: "آزاد؛ کنده‌کاری روی پوست گردو از هشت زاویه",
-    image: "art/Khoftegan.png",
-    ready: true
-  },
-    {
-    order: 10,
-    title: "هفت دلاور",
-    method: "آزاد",
-    image: "art/Haft Delavar.png",
-    ready: true
-  },
-  {
-    order: 11,
-    title: "اسکاراب؛ زایش دوباره",
-    method: "برگرفته از مصر باستان",
-    image: "art/Scarab.png",
-    ready: true
-  },
-  {
-    order: 12,
-    title: "فرزانگان",
-    method: "آزاد",
-    image: "art/Farzanegan.png",
-    ready: true
-  },
-  {
-    order: 13,
-    title: "تاج",
-    method: "آزاد، کنده‌کاری روی نیمهٔ پوست گردو",
-    image: "art/Taj.png",
-    ready: true
-  },
-  {
-    order: 14,
-    title: "شِدو و لاماسوی نگهبان",
-    method: "نیمه‌آزاد، برگرفته از تمدن میان‌رودان و هنر هخامنشی",
-    image: "art/Shedu.png",
-    ready: true
-  },
-  {
-    order: 15,
-    title: "نقاب",
-    method: "آزاد، قلم‌زنی روی پوست یک گردو",
-    image: "art/Neghab.png",
-    ready: true
-  },
-  {
-    order: 16,
-    title: "شهریاران",
-    method: "آزاد، کنده‌کاری روی تکه‌چوبی از عناب، از هشت زاویه",
-    image: "art/Sharyaran.png",
-    ready: true
-  },
-  {
-    order: 17,
-    title: "شاید کوروش",
-    method: "نیمه‌آزاد",
-    image: "art/Shayad Kurosh.png",
-    ready: true
-  },
-  {
-    order: 18,
-    title: "شیردال",
-    method: "نیمه‌آزاد، برگرفته از تمدن ایران باستان",
-    image: "art/Shirdal.png",
-    ready: true
-  },
-  {
-    order: 19,
-    title: "پیری",
-    method: "آزاد",
-    image: "art/Piri.png",
-    ready: true
-  },
-  {
-    order: 20,
-    title: "آپکالو؛ نگهبان بالدار",
-    method: "نیمه‌آزاد، برگرفته از هنر آشوری در تمدن میان‌رودان",
-    image: "art/Apkalo.png",
-    ready: true
-  },
-  {
-    order: 21,
-    title: "برزگران",
-    method: "آزاد",
-    image: "art/Barzegaran.png",
-    ready: true
-  },
-  {
-    order: 22,
-    title: "دلیر",
-    method: "آزاد، قلم‌زنی روی پوست گردو",
-    image: "art/Delir.png",
-    ready: true
-  },
-  {
-    order: 23,
-    title: "گردن‌آویز",
-    method: "آزاد",
-    image: "art/Gardan Aviz.png",
-    ready: true
-  },
-  {
-    order: 24,
-    title: "سربازان یونانی",
-    method: "برگرفته از هنر یونان باستان",
-    image: "art/Sarbazane Yonani.png",
-    ready: true
-  },
-  {
-    order: 25,
-    title: "مرگ و زایشی دیگر",
-    method: "برگرفته از تمدن مایا و آزتک",
-    image: "art/Maya.png",
-    ready: true
-  },
-  {
-    order: 26,
-    title: "فرزانه، سرچشمهٔ دانایی",
-    method: "برگرفته از هنر و تمدن ایران باستان",
-    image: "art/Farzane.png",
-    ready: true
-  },
-  {
-    order: 27,
-    title: "خرابات",
-    method: "آزاد، قلم‌زنی روی پوست یک گردو",
-    image: "art/Kharabat.png",
-    ready: true
-  },
-  {
-    order: 28,
-    title: "فضانورد",
-    method: "برگرفته از تمدن مایا و آزتک",
-    image: "art/Fazanavard.png",
-    ready: true
-  },
-  {
-    order: 29,
-    title: "ارابه‌ران",
-    method: "برگرفته از یونان باستان",
-    image: "art/Arabe Ran.png",
-    ready: true
-  }
-];
-  const gallery = document.getElementById("wood-gallery");
-
-  artworks
-    .filter(art => art.ready && art.image)
-    .sort((a, b) => a.order - b.order)
-    .forEach(art => {
-      const section = document.createElement("section");
-
-      section.style.textAlign = "center";
-      section.style.margin = "35px auto 60px";
-
-const link = document.createElement("a");
-link.href = art.image;
-link.addEventListener("click", function(event) {
-  event.preventDefault();
-  openArtwork(art.image, art.title);
-});
-
-const img = document.createElement("img");
-img.src = art.image;
-img.alt = art.title;
-img.loading = "lazy";
-img.style.width = "100%";
-img.style.maxWidth =
-  (art.title === "حافظ" ||
-   art.title === "پیری" ||
-   art.title === "آپکالو؛ نگهبان بالدار")
-    ? (window.innerWidth <= 600 ? "85%" : "400px")
-    : "650px";
-img.style.height = "auto";
-img.style.borderRadius = "8px";
-
-      link.appendChild(img);
-
-      const title = document.createElement("h3");
-      title.textContent = art.title;
-      title.style.color = "#d4af37";
-      title.style.fontSize = "23px";
-      title.style.fontWeight = "normal";
-      title.style.margin = "18px 0 0";
-
-const method = document.createElement("p");
-
-if (art.title === "حافظ") {
-  method.textContent = "شیوه: آزاد";
-
-  const poem = document.createElement("p");
-  poem.textContent =
-    "بیا ساقی! از کنج دیر مغان\n" +
-    "مشو دور که آنجاست گنج روان";
-
-  poem.style.whiteSpace = "pre-line";
-  poem.style.fontSize = "17px";
-  poem.style.lineHeight = "2.2";
-  poem.style.color = "#f5e6a8";
-  poem.style.margin = "15px 0";
-
-  section.appendChild(link);
-  section.appendChild(title);
-  section.appendChild(method);
-  section.appendChild(poem);
-
-} else if (art.title === "خفتگان") {
-  method.textContent = "شیوه: آزاد";
-
-  const poem = document.createElement("p");
-  poem.textContent = "خفتگان را خبر از محنت بیداران نیست.\nسعدی";
-
-  poem.style.whiteSpace = "pre-line";
-  poem.style.fontSize = "17px";
-  poem.style.lineHeight = "2.2";
-  poem.style.color = "#f5e6a8";
-  poem.style.margin = "15px 0";
-
-  section.appendChild(link);
-  section.appendChild(title);
-  section.appendChild(method);
-  section.appendChild(poem);
-
-} else if (art.title === "شهریاران") {
-  method.textContent = art.method
-    ? "شیوه: " + art.method
-    : "";
-
-  const poem = document.createElement("p");
-  poem.textContent =
-    "شهر یاران بود و خاک مهربانان این دیار\n" +
-    "مهربانی کی سر آمد شهریاران را چه شد\n" +
-    "حافظ";
-
-  poem.style.whiteSpace = "pre-line";
-  poem.style.fontSize = "17px";
-  poem.style.lineHeight = "2.2";
-  poem.style.color = "#f5e6a8";
-  poem.style.margin = "15px 0";
-
-  section.appendChild(link);
-  section.appendChild(title);
-  section.appendChild(method);
-  section.appendChild(poem);
-} else if (art.title === "خرابات") {
-  method.textContent = art.method
-    ? "شیوه: " + art.method
-    : "";
-
-  const poem = document.createElement("p");
-  poem.textContent =
-    "در خرابات مغان ما نیز همداستان شویم\n" +
-    "حافظ";
-
-  poem.style.whiteSpace = "pre-line";
-  poem.style.fontSize = "17px";
-  poem.style.lineHeight = "2.2";
-  poem.style.color = "#d8c892";
-  poem.style.margin = "15px 0";
-
-  section.appendChild(link);
-  section.appendChild(title);
-  section.appendChild(method);
-  section.appendChild(poem);
-
-
-} else {
-  method.textContent = art.method
-    ? "شیوه: " + art.method
-    : "";
-
-  section.appendChild(link);
-  section.appendChild(title);
-  section.appendChild(method);
-}
-
-method.style.fontSize = "16px";
-method.style.margin = "0";
-
-      gallery.appendChild(section);
-    });
-
-  function openArtwork(image, title) {
-    const overlay = document.createElement("div");
-
-    overlay.style.position = "fixed";
-    overlay.style.inset = "0";
-    overlay.style.background = "rgba(0, 0, 0, 0.95)";
-    overlay.style.display = "flex";
-    overlay.style.alignItems = "center";
-    overlay.style.justifyContent = "center";
-    overlay.style.zIndex = "9999";
-    overlay.style.padding = "20px";
-    overlay.style.boxSizing = "border-box";
-
-    const img = document.createElement("img");
-    img.src = image;
-    img.alt = title;
-    img.style.width = "100%";
-    img.style.maxWidth = "900px";
-    img.style.maxHeight = "95vh";
-    img.style.objectFit = "contain";
-    img.style.borderRadius = "8px";
-
-    const close = document.createElement("button");
-    close.textContent = "×";
-    close.setAttribute("aria-label", "بستن تصویر");
-    close.style.position = "absolute";
-    close.style.top = "15px";
-    close.style.right = "20px";
-    close.style.fontSize = "36px";
-    close.style.color = "#d4af37";
-    close.style.background = "none";
-    close.style.border = "none";
-    close.style.cursor = "pointer";
-
-    overlay.appendChild(img);
-    overlay.appendChild(close);
-    document.body.appendChild(overlay);
-
-    close.onclick = () => overlay.remove();
-
-    overlay.onclick = (event) => {
-      if (event.target === overlay) {
-        overlay.remove();
-      }
-    };
-  }
-</script>
-
-
+<section class="art-sections" aria-label="بخش‌های هنر">
+      <a class="art-card" href="asar-choobi.html">
+        <h2>آثار چوبی</h2>
+        <p>دیدن نگارخانهٔ آثار چوبی</p>
+      </a>
+      <a class="art-card" href="khodkar-choobi.html">
+        <h2>خودکار و روان‌نویس چوبی</h2>
+        <p>دست‌ساخته‌های چوبی مهردار</p>
+      </a>
+    </section>
 
   </main>
 
